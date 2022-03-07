@@ -1,0 +1,119 @@
+<!-- IMPORT MAPS FROM MAPBOX -->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Map</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script> <!-- Import library of maps -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" /> <!-- Import Styles of maps -->
+    <style>
+        body{margin: 0; padding: 0;}
+        #Map{position: absolute; top: 0; bottom: 0; width: 100%;}
+        .Map-overlay{
+          position: absolute;
+          left: 0;
+          padding: 10px;
+        }
+    </style>
+</head>
+
+<!-- MAP CREATION -->
+<body>
+<div id="map"></div>
+
+<!--ONCLICK BUTTON -->
+<div class="map-overlay top">
+  <button 
+  style="font-size: 1em;"
+  style="bottom: 100px"
+  onclick="run()"> 
+  Run Real-Time Tracking
+  </button>
+</div>
+    
+<script>   
+// Access Token from https://account.mapbox.com
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpbGVmYXNlIiwiYSI6ImNremVrOGxieTM4cHoyb28yczc0aW9xcmMifQ.Yp8jQ0qyLIKzFejO1Ofn9w';
+
+// Function to create a new Map
+const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [-71.09989488814583,42.35287723245631],
+    zoom: 13});
+
+// Navigation Control
+map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true,showUserHeading: true}));
+const nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-right');
+
+// ScaleControl
+const scale = new mapboxgl.ScaleControl({maxWidth: 80, unit: 'metric'});
+map.addControl(scale);
+scale.setUnit('metric');
+
+// Function to create a markers
+    var House = new mapboxgl.Marker({color: "#BB0036"}) // MIT
+        .setLngLat([-71.09335,42.35909])
+        .setPopup(new mapboxgl.Popup().setHTML("<h4>M.I.T.</h4>"))
+        .addTo(map)
+    House.togglePopup();
+        
+    var MIT = new mapboxgl.Marker({color: "#FFC500"}) // My Home
+        .setLngLat([-71.08542,42.36221])
+        .setPopup(new mapboxgl.Popup().setHTML("<h4>HOME</h4>"))
+        .addTo(map)
+    MIT.togglePopup();
+
+    var Traker = new Array(); // Recordar dejar el arreglo fuera del loop para que se reescriba
+
+// Request real-time data from MBTA bus route 1
+async function getBusLocations(){
+    var url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
+    // reques and wait until all data cameback
+    var response = await fetch(url);
+    // extract data and wait 
+    var json = await response.json();
+    // return the data to the calling function
+    return json.data;
+}
+// Request data programmatically 
+async function run(){
+    const buses = await getBusLocations();
+    console.log(new Date());
+    console.log(buses);
+    
+// Timer
+    setTimeout(run, 5000);
+
+// Loop to change Traker
+    if (Traker.length < buses.length) // Comparison
+    {Traker.length = 0; // Vector 
+
+      for (var i = 0; i < buses.length; i++){
+        var marker = new mapboxgl.Marker({color: "#0000A9"})
+        .setLngLat([
+            buses[i].attributes.longitude,
+            buses[i].attributes.latitude])
+        .addTo(map);
+        Traker.push(marker);}}
+    else {
+        for (var i = 0; i < buses.length; i++){
+        Traker[i].setLngLat([
+            buses[i].attributes.longitude,
+            buses[i].attributes.latitude]);
+      }
+    }
+  }
+</script>
+</body>
+</html>
+
+<!-- INFO EXTRA
+mapbox://styles/mapbox/streets-v11
+mapbox://styles/mapbox/outdoors-v11
+mapbox://styles/mapbox/light-v10
+mapbox://styles/mapbox/dark-v10
+mapbox://styles/mapbox/satellite-v9
+mapbox://styles/mapbox/satellite-streets-v11
+MIT Position: lat/lng [-71.091542,42.358862]
+-->

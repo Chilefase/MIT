@@ -1,0 +1,98 @@
+<!-- IMPORT MAPS FROM MAPBOX -->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Map</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script> <!-- Import library of maps -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" /> <!-- Import Styles of maps -->
+    <style>
+        body{margin: 0; padding: 0;}
+        #Map{position: absolute; top: 0; bottom: 0; width: 100%;}
+        .Map-overlay{
+          position: absolute;
+          left: 0;
+          padding: 10px;
+        }
+    </style>
+</head>
+
+<!-- MAP CREATION -->
+<body>
+<div id="map"></div>
+
+<!--ONCLICK BUTTON -->
+<div class="map-overlay top">
+    <button 
+    style="font-size: 2em;"
+    onclick="move()"> 
+    MBTA (CT2) from Kendall to Museum of Fine Arts
+    </button>
+</div>
+
+<script>
+    
+    // Access Token from https://account.mapbox.com
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpbGVmYXNlIiwiYSI6ImNremVrOGxieTM4cHoyb28yczc0aW9xcmMifQ.Yp8jQ0qyLIKzFejO1Ofn9w';
+
+    // Function to create a new Map
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/dark-v10',
+        center: [-71.10221219948116,42.36445201006954],
+        zoom: 14
+    })
+    // Function to create a markers
+    const marker1 = new mapboxgl.Marker()
+        .setLngLat([-71.09335,42.35909])
+        .addTo(map)
+        
+    const marker2 = new mapboxgl.Marker()
+        .setLngLat([-71.08542,42.36221])
+        .addTo(map)
+
+
+  const busStops = [
+      [-71.08816471121624, 42.363066844681505], 
+      [-71.09003069774772, 42.36269770249409],
+      [-71.09446045185867, 42.36028784310054],
+      [-71.09902010549335, 42.358130359988444],
+      [-71.10513691134146, 42.35493361128177],
+      [-71.10998410136848, 42.349262199395056],
+      [-71.10857669231424, 42.34886547848483],
+      [-71.10582503933618, 42.348255352518514],
+      [-71.10428680739975, 42.34519482830973],
+      [-71.10330342882472, 42.342617578297066],
+      [-71.10554084221343, 42.34044033316428],
+      [-71.1070339564746, 42.338706490337216],
+      [-71.10446724671561, 42.3374460855235],
+      [-71.09986164428463, 42.33582177044829],
+      [-71.0953011088673, 42.33765906281088],
+      [-71.09402896345006, 42.3393695951315]]
+
+  // animate marker
+  var counter = 0;
+  function move(){
+      setTimeout(() =>{
+          if (counter >= busStops.length)
+          return;
+          marker1.setLngLat(busStops[counter]);
+          counter++;
+          move();
+      }, 1000);
+    
+  }
+</script>
+</body>
+</html>
+
+
+<!-- INFO EXTRA
+
+mapbox://styles/mapbox/streets-v11
+mapbox://styles/mapbox/outdoors-v11
+mapbox://styles/mapbox/light-v10
+mapbox://styles/mapbox/dark-v10
+mapbox://styles/mapbox/satellite-v9
+mapbox://styles/mapbox/satellite-streets-v11
+MIT Position: lat/lng [-71.091542,42.358862]
+-->

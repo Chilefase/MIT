@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script src="https://www.google.com/jsapi"></script>
+<script src="sort.js"></script>
+<script src="bostonEmployeeSalaries.json"></script>
+
+<div id="chart_div" style="width: 1800px; height: 3000px;">Hello</div>
+
+<script> 
+
+var generatePoints = function(){
+	var length 	= data.data.length;
+	var points  = [];
+	var salary  = 0;
+	var job     = '';
+
+	for(var i=0; i<length; i++){
+		job    = data.data[i][9];
+		salary = data.data[i][18];
+		points.push({
+			job    : job,
+			salary : Number(salary)
+		});			
+	} 
+	return points;
+};
+
+var bubbleSort = function (points){
+	// --------------------------
+ 	//		YOUR CODE
+ 	// --------------------------
+};
+
+var run = function run(){
+	var points = generatePoints();
+	bubbleSort(points);
+	var dataset = generateDataset(points);	
+	drawChart(dataset);
+};
+window.onload = () => run();
+
+</script>
+
+</html>

@@ -1,0 +1,22 @@
+<script>
+// Request data programmatically 
+async function run(){
+    const locations = await getBusLocations();
+    console.log(new Date());
+    console.log(locations);
+// Timer
+    setTimeout(run, 5000);
+}
+
+// Request real-time data from MBTA bus route 1
+async function getBusLocations(){
+    const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
+    // reques and wait until all data cameback
+    const response = await fetch(url);
+    // extract data and wait 
+    const json = await response.json();
+    // return the data to the calling function
+    return json.data;
+}
+    run();
+</script>

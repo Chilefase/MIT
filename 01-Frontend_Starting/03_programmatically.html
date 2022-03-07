@@ -1,0 +1,25 @@
+<!-- --------------------------------- -->
+<!--    Add shape programmatically     -->
+<!-- --------------------------------- -->
+
+<button onClick="addCircle()">Add</button>
+
+<script>
+    var x = 100;
+    var y = 200;
+
+    function addCircle(){
+        var div = document.createElement("div");
+        div.style.zIndex = "1";
+        div.style.position = "absolute";
+        div.style.left = x + "px";
+        div.style.top = y + "px";
+        div.style.width = "20px";
+        div.style.height = "20px";
+        div.style.borderRadius = "50%";
+        div.style.background = "black";
+
+        // append to doc
+        document.getElementsByTagName('body')[0].appendChild(div);
+    }
+</script>

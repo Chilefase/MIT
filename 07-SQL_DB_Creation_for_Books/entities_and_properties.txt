@@ -1,0 +1,88 @@
+1. List of the entities and properties of the book industry.
+
+Entity 01: Books
+	Property 01: BookID (PK)
+	Property 02: GenreID 	
+	Property 03: AuthorID (FK)	
+	Property 04: PublisherID (FK)
+	Property 05: EditorID (FK)
+	Property 06: CustomerID (FK)
+	Property 07: Title
+	Property 08: Pages
+	Property 09: Edition
+	Property 10: Price
+
+Entity 02: Authors
+	Property 01: AuthorID (PK)
+	Property 02: Author_FirstName
+	Property 03: Author_LastName
+	Property 04: Author_Country
+	Property 05: Author_Num_books
+	Property 06: Author_Royalties
+
+Entity 03: Publisher
+	Property 01: PublisherID (PK)
+	Property 02: Publisher_Name
+	Property 03: Publisher_Country
+	Property 04: Publisher_Num_books
+	Property 05: Publisher_Royalties
+
+Entity 04: Editor
+	Property 01: EditorID (PK)
+	Property 02: Editor_Name
+	Property 03: Editor_Mail
+	Property 04: Editor_Num_books
+	Property 05: Editor_Royalties
+
+Entity 05: Orders
+	Property 01: OrderID (PK)
+	Property 02: BookID (FK)
+	Property 03: CustomerID (FK)
+	Property 04: Order_Num_books
+	Property 05: Order_Amount
+	Property 06: Date
+
+Entity 06: Customer 
+	Property 01: CustomerID (PK)
+	Property 02: Customer_FirstName
+	Property 03: Customer_LastName
+	Property 04: Customer_Phone
+	Property 05: Customer_Email
+	Property 06: Customer_Adress
+
+2. List of the unique identifiers – primary keys.
+
+
+PK 01: BookID
+PK 02: GenreID
+PK 03: AuthorID
+PK 04: PublisherID
+PK 05: EditorID
+PK 06: CustomerID
+PK 07: OrderID
+
+
+3. List of the table relationships – the cardinality between entities.
+
+Books, Authors, N:N
+Books, Publishers, N:1
+Books, Editor N:N
+Books, Order, N:1
+Books, Customer, N:1
+Orders, Book, N:1
+Orders, Customer, N:1
+
+----------------------------------------------------------------------
+Note:
+Books per author.
+Authors per book.
+Author royalties on a book.
+Book royalties per author.
+Books in a genre.
+Books published by a publisher.
+Editors per book.
+Books per editor.
+Books in an order.
+Orders for a book.
+Customer orders.
+Orders per customer

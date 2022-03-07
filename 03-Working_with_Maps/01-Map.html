@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<!-- IMPORT MAPS FROM MAPBOX -->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Map</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script> <!-- Import library of maps -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" /> <!-- Import Styles of maps -->
+    <style>
+        body{margin: 0; padding: 0;}
+        #map{position: absolute; top: 0; bottom: 0; width: 100%;}
+    </style>
+</head>
+
+<!-- MAP CREATION -->
+<body>
+<div id="map"></div>
+<script>
+    
+    // Access Token from https://account.mapbox.com
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2hpbGVmYXNlIiwiYSI6ImNremVrOGxieTM4cHoyb28yczc0aW9xcmMifQ.Yp8jQ0qyLIKzFejO1Ofn9w';
+
+    // Function to create a new Map
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/dark-v10',
+        center: [-71.091542,42.358862],
+        zoom: 13
+    })
+</script>
+</body>
+</html>
+
+<!-- INFO EXTRA
+
+mapbox://styles/mapbox/streets-v11
+mapbox://styles/mapbox/outdoors-v11
+mapbox://styles/mapbox/light-v10
+mapbox://styles/mapbox/dark-v10
+mapbox://styles/mapbox/satellite-v9
+mapbox://styles/mapbox/satellite-streets-v11
+
+MIT Position: lat/lng [-71.091542,42.358862]
+-->

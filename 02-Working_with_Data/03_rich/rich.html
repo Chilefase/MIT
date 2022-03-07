@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<script src="https://www.google.com/jsapi"></script>
+<script src="rich.js"></script>
+<script src="bostonEmployeeSalaries.json"></script>
+
+<div id="chart_div" style="width: 1800px; height: 3000px;">Hello</div>
+
+<script>
+var salary   = 250000;
+var salaries = data.data;
+
+// select salaries over 250,000
+var generatePoints = function(){
+	var points = [];
+
+	// sample object
+	// var item = {'job' : 'gardener', 'salary' : 60000};
+
+	// -----------------------------
+	//			YOUR CODE
+	// -----------------------------	
+
+	// return data
+	return points;
+};
+
+var run = function run(){
+	var points = generatePoints();
+	var dataset = generateDataset(points);	
+	drawChart(dataset);
+};
+window.onload = () => run();
+
+</script>
+
+</html>
