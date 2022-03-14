@@ -11,7 +11,7 @@ import mysql.connector
 from tabulate import tabulate
 
 cnx = mysql.connector.connect(user='root', 
-    password='MyNewPass',
+    password='Xncsc8h4',
     host='127.0.0.1',
     database='',
     auth_plugin='mysql_native_password')
