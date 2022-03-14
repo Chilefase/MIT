@@ -3,7 +3,7 @@ from flaskext.mysql import MySQL
 import mysql.connector
 
 cnx = mysql.connector.connect(user='root', 
-    password='MyNewPass',
+    password='Xncsc8h4',
     host='127.0.0.1',
     database='education',
     auth_plugin='mysql_native_password')
@@ -36,7 +36,7 @@ def colleges():
         for college in colleges:
             html += college[1] + '<br>'
         return html
-    
+
 # start server
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
