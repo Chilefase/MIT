@@ -26,16 +26,29 @@ mysql.init_app(app)
 # ----------------------------------- 
 #           YOUR CODE
 # ----------------------------------- 
+@app.route('/')
+def index():
+    return render_template('/index.html')
+
+@app.route('/add', methods=['POST'])
+def add():
+    # Fetch form data
+    college = request.form
+    name = college['name']
+    students = college['students']
+    cur = mysql.get_db().cursor()
+    cur.execute("INSERT INTO Colleges(Name, Students) VALUES(%s, %s)",(name, students))
+    mysql.get_db().commit()
+    return redirect('/colleges')
+
 @app.route('/colleges')
 def colleges():
     cursor = mysql.get_db().cursor()
-    response = cursor.execute('SELECT * FROM Colleges')
-    html = ''
+    response = cursor.execute("SELECT * FROM Colleges")
+    html = ''    
     if response > 0:
         colleges = cursor.fetchall()
-        for college in colleges:
-            html += college[1] + '<br>'
-        return html
+        return render_template('colleges.html', list=colleges)
 
 # start server
 if __name__ == '__main__':
